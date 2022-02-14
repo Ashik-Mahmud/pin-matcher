@@ -34,21 +34,17 @@ function isMatch() {
     let pinInputValues = pinInputField.value;
     let inputValues = displayInputField.value;
     if (pinInputValues === '' || inputValues === '') {
-        notifyMessage.innerText = "❌ Fields are empty.";
-        soundEffect('invalid.mp3')
+        soundEffect('invalid.mp3', "❌ Fields are empty.")
 
     } else if (pinInputValues === inputValues) {
-        notifyMessage.innerText = '✅ Pin Matched... Secret door is opening for you';
         displayInputField.value = '';
-        soundEffect('correct.mp3')
+        soundEffect('correct.mp3', '✅ Pin Matched... Secret door is opening for you')
         randomPin();
         chance.innerText = 3;
 
     } else {
-        notifyMessage.innerText = " ❌ Pin (" + inputValues + ") Didn't Match, Please try again";
-        soundEffect('wrong.mp3')
+        soundEffect('wrong.mp3', " ❌ Pin (" + inputValues + ") Didn't Match, Please try again")
         takeChance();
-
     }
 };
 
@@ -59,14 +55,14 @@ function takeChance() {
     chance.innerText = chanceValue;
     if (parseInt(chance.innerText) === 0) {
         document.querySelector(".submit-btn").classList.add("disabled");
-        notifyMessage.innerText = '⏰ Your chance end!! try again later';
-        soundEffect('timeout.mp3');
+        soundEffect('timeout.mp3', '⏰ Your chance end!! try again later');
     }
 }
 
 /*  function for sound effect  */
-function soundEffect(path) {
+function soundEffect(path, error) {
     notifyMessage.classList.add('active');
+    notifyMessage.innerText = error;
     audio.src = `./effect/${path}`;
     audio.play();
 }
