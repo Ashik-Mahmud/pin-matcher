@@ -34,25 +34,21 @@ function isMatch() {
     let pinInputValues = pinInputField.value;
     let inputValues = displayInputField.value;
     if (pinInputValues === '' || inputValues === '') {
-        notifyMessage.classList.add('active');
         notifyMessage.innerText = "❌ Fields are empty.";
-        audio.src = './effect/invalid.mp3';
-        audio.play();
+        soundEffect('invalid.mp3')
+
     } else if (pinInputValues === inputValues) {
-        notifyMessage.classList.add('active');
         notifyMessage.innerText = '✅ Pin Matched... Secret door is opening for you';
         displayInputField.value = '';
-        audio.src = './effect/correct.mp3';
-        audio.play();
+        soundEffect('correct.mp3')
         randomPin();
         chance.innerText = 3;
 
     } else {
-        notifyMessage.classList.add('active');
         notifyMessage.innerText = " ❌ Pin (" + inputValues + ") Didn't Match, Please try again";
-        audio.src = './effect/wrong.mp3';
+        soundEffect('wrong.mp3')
         takeChance();
-        audio.play();
+
     }
 };
 
@@ -64,7 +60,13 @@ function takeChance() {
     if (parseInt(chance.innerText) === 0) {
         document.querySelector(".submit-btn").classList.add("disabled");
         notifyMessage.innerText = '⏰ Your chance end!! try again later';
-        audio.src = './effect/timeout.mp3';
-        audio.play();
+        soundEffect('timeout.mp3');
     }
+}
+
+/*  function for sound effect  */
+function soundEffect(path) {
+    notifyMessage.classList.add('active');
+    audio.src = `./effect/${path}`;
+    audio.play();
 }
