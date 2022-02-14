@@ -10,6 +10,7 @@ function randomPin() {
     let randString = rand + '';
     if (randString.length === 5) {
         pinInputField.value = randString;
+        pinInputField.focus();
     }
 }
 /* function for display value when users press key  */
@@ -23,6 +24,7 @@ for (let button of buttons) {
             displayInputField.value = displayInputField.value.slice(0, -1);
         } else {
             displayInputField.value += buttonValue;
+            displayInputField.focus();
         }
 
     })
