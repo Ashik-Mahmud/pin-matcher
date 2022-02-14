@@ -4,8 +4,8 @@ const displayInputField = document.getElementById("display-input");
 const notifyMessage = document.querySelector(".notify");
 const audio = document.getElementById("audio");
 
-/* function for random genarte pin */
-function randomPin() {
+/* function for random generate pin */
+function randomPin() { 
     let rand = Math.floor(Math.random() * 100000);
     let randString = rand + '';
     if (randString.length === 5) {
